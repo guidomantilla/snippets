@@ -1,0 +1,40 @@
+git init
+git status
+git add .
+git commit -m ""
+git pull origin
+git push -u origin --all
+git push -u clone --all
+git push -u heroku --all
+
+git remote add origin git@gitlab.com:ravenware/iib-uti-workspace/iib-uti-v2-workspace.git
+git remote add clone git@github.com:guidomantilla/[repositorio]
+
+git pull clone master --allow-unrelated-histories
+git rm --cached -r .
+
+git tag: nos permite agregar etiquetas a nuestros cambios.
+	-a para la anotación
+	-m para el mensaje
+	-l nos muestra la lista de etiquetas
+	-f para renombrar
+	-d para borrar
+
+git log
+--oneline: Coloca los commits de manera resumida y en una sola línea.
+-–graph: Nos mostraria los diferentes commits en las ramas o bifurcaciones con un asterisco.
+--[numero]: Nos permite ver los últimos commits
+
+git diff [SHA 1]1 y [SHA 1]2
+
+git reset --soft [SHA 1]: elimina los cambios hasta el staging area
+git reset --mixed [SHA 1]: elimina los cambios hasta el working area
+git reset --hard [SHA 1]: regresa hasta el commit del [SHA 1]
+
+git branch [nombre] se crea una nueva rama
+	-l: listamos las ramas
+	-d/-D [nombre]: borramos rama
+-m [nombre] [nombre_nuevo]: para renombrar ramas
+
+git checkout [nombre rama o SHA1]
+git merge [rama]: Nos permite mezclar los cambios realizados en dicha rama con la rama en la que estamos.

@@ -1,0 +1,22 @@
+grep "[texto]" [archivo o directorio] Busca dentro de un archivo una cadena de texto (“string”), por ejemplo: grep "joaqnjs" (en un archivo csv).
+
+		-r Esta bandera sirve para buscar recursivamente
+
+		-e Esta bandera determina la expresión a buscar
+		La mejor forma de usar estas banderas es: Tomando ambas banderas y el comando grep nos podemos ubicar en un directorio con diferentes archivos en el y buscar “una cadena de string” entre cada uno de ellos, por ejemplo: grep -r ./ -e joaqnjs
+
+		-n Esta bandera nos muestra el nombre del archivo y la línea
+
+		-v Esta bandera busca una cadena de string y si la encuentra no la imprime, es decir, imprime las no coincidencias
+
+		^ Indica el inicio (o desde el inicio) de línea
+
+		$ Indica el fin (o hasta el fin) de línea
+
+		find [directorio] -name "[texto]" Busca por nombre de archivos.
+
+		-type f Especifica que es un archivo.
+
+		-exec [comando] Al finalizar la busqueda ejecuta un comando. Un comando para renombrar todos los archivos que coincidan es: mv {} {}.txt \: Las llaves hacen referencia al archivo que se encontró {}.
+
+		split -l [cantidad de líneas] [archivo] [destino] Rompe un archivo en la cantidad de líneas que se determine y los resultados lo guarda en un destino.

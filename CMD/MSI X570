@@ -1,0 +1,116 @@
+echo "**************************************************"
+echo "***       UPDATING PACKAGES REPOSITORIES       ***"
+echo "**************************************************"
+sudo apt-get update && sudo apt-get upgrade -y && sudo apt-get -y dist-upgrade
+echo ""
+echo ""
+echo "**************************************************"
+echo "***       INSTALLING:                          ***"
+echo "***       - git, curl, nano, htop              ***"
+echo "***       - others                             ***"
+echo "**************************************************"
+
+curl -sL https://deb.nodesource.com/setup_14.x | sudo -E bash -
+
+sudo apt install \
+	apt-utils \
+	gnupg-agent \
+	apt-transport-https \
+	ca-certificates \
+	software-properties-common \
+	git \
+	curl \
+	nano \
+	htop \
+	python2 \
+	python3 \
+	zsh \
+	gnome-tweaks \
+	gnome-shell-extensions \
+	node-typescript \
+	npm \
+	make \
+	openjdk-14-jdk -y 
+	
+echo ""
+echo ""
+echo "**************************************************"
+echo "***       INSTALLING Archive Utilities         ***"
+echo "**************************************************"
+sudo apt-get install rar unrar p7zip-full p7zip-rar -y
+echo ""
+echo ""
+echo "**************************************************"
+echo "***       INSTALLING Video Utilities           ***"
+echo "**************************************************"
+sudo apt-get install vlc ubuntu-restricted-extras -y
+echo ""
+echo ""
+echo "**************************************************"
+echo "***       INSTALLING DOCKER                    ***"
+echo "**************************************************"
+curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -
+sudo apt-key fingerprint 0EBFCD88
+sudo add-apt-repository \
+   "deb [arch=amd64] https://download.docker.com/linux/ubuntu \
+   $(lsb_release -cs) \
+   stable"
+sudo apt-get update
+sudo apt-get install docker-ce docker-ce-cli containerd.io -y
+sudo docker run hello-world
+sudo groupadd docker
+sudo usermod -aG docker $USER
+docker run hello-world
+#chown "$USER":"$USER" /home/"$USER"/.docker -R
+#chmod g+rwx "$HOME/.docker" -R
+echo ""
+echo ""
+echo "**************************************************"
+echo "***       INSTALLING DOCKER COMPOSE            ***"
+echo "**************************************************"
+sudo curl -L "https://github.com/docker/compose/releases/download/1.27.4/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
+sudo chmod +x /usr/local/bin/docker-compose
+echo ""
+echo ""
+echo "**************************************************"
+echo "***       INSTALLING OH MY ZSH                 ***"
+echo "**************************************************"
+git clone https://github.com/robbyrussell/oh-my-zsh.git ~/.oh-my-zsh
+
+echo ""
+echo ""
+echo "**************************************************"
+echo "***       INSTALLING POP-OS SHELL              ***"
+echo "**************************************************"
+mkdir Workspace
+cd Workspace
+git clone https://github.com/pop-os/shell
+cd shell/
+make local-install -y
+cd $HOME
+echo ""
+echo ""
+echo "**************************************************"
+echo "***       DOCKER VERSION                       ***"
+echo "**************************************************"
+docker version
+echo ""
+echo ""
+echo "**************************************************"
+echo "***       DOCKER COMPOSE VERSION               ***"
+echo "**************************************************"
+docker-compose version
+echo ""
+echo ""
+echo "**************************************************"
+echo "***       GIT VERSION                          ***"
+echo "**************************************************"
+git version
+echo ""
+echo ""
+echo "**************************************************"
+echo "***       REBOOTING NOW                        ***"
+echo "**************************************************"
+history -c
+sleep 10
+sudo reboot now

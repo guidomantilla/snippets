@@ -1,0 +1,21 @@
+   41  ubuntu-drivers devices
+   42  sudo ubuntu-drivers autoinstall
+
+   58  sudo apt install openssh-server
+   59  sudo systemctl status ssh
+   60  sudo ufw allow ssh
+   
+   65  sudo apt install zsh
+   66  git clone https://github.com/robbyrussell/oh-my-zsh.git ~/.oh-my-zsh
+   
+   
+  108  sudo python3 ./multibootusb
+  109  sudo python3 multibootusb
+  112  whereis multibootusb
+  113  whereis /usr/bin/multibootusb
+  114  sudo python3 /usr/bin/multibootusb
+  115  python3 /usr/bin/multibootusb
+  116  sudo python3 /usr/bin/multibootusb
+  
+
+  

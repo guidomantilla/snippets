@@ -1,0 +1,7 @@
+ssh-keygen -t rsa -b 4096 -C 'raven_mantilla@yahoo.com'
+ssh-keygen -t rsa -b 4096 -C 'guido.mantilla@yahoo.com'
+ls -al ~/.ssh 
+eval "$(ssh-agent -s)" 
+ssh-add ~/.ssh/id_rsa  
+
+ssh-copy-id -i $HOME/.ssh/id_rsa.pub raven@192.168.0.201

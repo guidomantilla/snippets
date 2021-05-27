@@ -1,0 +1,18 @@
+npm install -g @angular/cli
+npm install -g bower
+npm install -g cordova
+npm install -g eslint
+npm install -g grunt-cli
+npm install -g gulp-cli
+npm install -g ionic
+npm install -g karma-cli
+npm install -g less
+npm install -g nodemon
+npm install -g serverless
+npm install -g tslint
+npm install -g typescript
+npm install -g typings
+npm install -g newman
+
+
+npm outdated -g --depth=0

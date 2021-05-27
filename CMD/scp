@@ -1,0 +1,6 @@
+scp from mac to thinkpad-edge
+------------------------------
+
+scp -r raven@192.168.1.12:'/Users/raven/Movies/Series/Raised\ by\ Wolves' /home/raven/Vídeos/Series/
+
+scp -r raven@192.168.0.123:"/home/raven/Imágenes/'Captura de pantalla de 2020-10-29 17-59-02.png'" /home/raven/Vídeos/Series/ 

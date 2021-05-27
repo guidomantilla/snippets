@@ -1,0 +1,20 @@
+
+docker system prune -f
+docker image prune -f 
+docker container prune -f
+
+
+docker build . -t [image_name]
+
+docker container run --detach --restart always --publish 3306:3306 --name [container_name] [image_name]
+
+docker container exec [container_name] [command]
+docker container exec -it [container_name] [sh | bash]
+
+
+docker network create [network_name]
+
+
+docker login
+docker tag [image_name] [image_tag_name]
+docker push [image_tag_name]

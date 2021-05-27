@@ -1,0 +1,129 @@
+/*
+ * 
+ */
+package co.guidomantillatarazona.toolbox.spring.sample.api;
+
+import java.util.Properties;
+
+import javax.sql.DataSource;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.boot.context.properties.ConfigurationProperties;
+import org.springframework.boot.jdbc.DataSourceBuilder;
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Primary;
+import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
+import org.springframework.jdbc.datasource.DataSourceTransactionManager;
+import org.springframework.orm.jpa.JpaTransactionManager;
+import org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean;
+import org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter;
+import org.springframework.transaction.PlatformTransactionManager;
+import org.springframework.transaction.annotation.EnableTransactionManagement;
+
+/**
+ * The Class PersistenceConfig.
+ */
+@Configuration
+@EnableJpaRepositories
+@EnableTransactionManagement
+public class PersistenceConfig {
+
+	/*
+	 * *****************************************************************************
+	 * *** The app asumes that in spring.datasource are the parameters for the main
+	 * database, THE BUSINESS ONE. <br/>
+	 *
+	 * So, first we have to create a Datasource based on these parameters. <br/>
+	 *
+	 * Then, we need to create a PlatformTransactionManager object to handle the
+	 * transactions required by this Datasource. <br/>
+	 *
+	 * In this case, we are going to use JPA. So the PlatformTransactionManager
+	 * object must be created according to this. <br/>
+	 *
+	 * Thats why we must create a @Bean method to create a
+	 * LocalContainerEntityManagerFactoryBean object. This is something required by
+	 * JPA. <br/>
+	 *
+	 * The clases that affected by this configuration are CompanyDAO2 and Company2.
+	 * This is because we explore the usage of Spring Data Rest JPA. <br/>
+	 *
+	 * Later, we are a going to compare this implementation with another one using
+	 * plain old JDBC. <br/>
+	 *
+	 * *****************************************************************************
+	 * ***
+	 */
+	@Bean
+	@Primary
+	@ConfigurationProperties(prefix = "spring.datasource")
+	public DataSource dataSource() {
+		return DataSourceBuilder.create().build();
+	}
+
+	@Bean
+	@Autowired
+	public LocalContainerEntityManagerFactoryBean entityManagerFactory(DataSource datasource) {
+
+		Properties hibernateProperties = new Properties();
+		hibernateProperties.setProperty("hibernate.dialect", "org.hibernate.dialect.MySQLDialect");
+		hibernateProperties.setProperty("hibernate.show_sql", "true");
+
+		LocalContainerEntityManagerFactoryBean em = new LocalContainerEntityManagerFactoryBean();
+		em.setDataSource(datasource);
+		em.setPackagesToScan(new String[] { "co.guidomantillatarazona.toolbox.spring.sample.api" });
+
+		HibernateJpaVendorAdapter vendorAdapter = new HibernateJpaVendorAdapter();
+		em.setJpaVendorAdapter(vendorAdapter);
+		em.setJpaProperties(hibernateProperties);
+		return em;
+	}
+
+	@Bean
+	@Primary
+	@Autowired
+	public PlatformTransactionManager transactionManager(LocalContainerEntityManagerFactoryBean entityManagerFactory) {
+		JpaTransactionManager txManager = new JpaTransactionManager();
+		txManager.setEntityManagerFactory(entityManagerFactory.getNativeEntityManagerFactory());
+		return txManager;
+	}
+
+	/*
+	 * *****************************************************************************
+	 * The config asumes that in security.datasource are the parameters for the
+	 * security database, THIS COULD BE ANOTHE DATABASE OR SCHEMA. <br/>
+	 *
+	 * So, first we have to create a Datasource based on these parameters. <br/>
+	 *
+	 * Then, we need to create a PlatformTransactionManager object to handle the
+	 * transactions required by this Datasource. <br/>
+	 *
+	 * *****************************************************************************
+	 */
+
+	/**
+	 * Security data source.
+	 *
+	 * @return the data source
+	 */
+	@Bean("securityDataSource")
+	@ConfigurationProperties(prefix = "security.datasource")
+	public DataSource securityDataSource() {
+		return DataSourceBuilder.create().build();
+	}
+
+	/**
+	 * Security transaction manager.
+	 *
+	 * @param datasource the datasource
+	 * @return the platform transaction manager
+	 */
+	@Bean("securityTransactionManager")
+	@Autowired
+	public PlatformTransactionManager securityTransactionManager(
+			@Qualifier("securityDataSource") DataSource datasource) {
+		return new DataSourceTransactionManager(datasource);
+	}
+}

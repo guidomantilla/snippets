@@ -1,0 +1,2 @@
+sudo systemctl start | status | stop [service_name] 
+sudo service [service_name] start | status | stop

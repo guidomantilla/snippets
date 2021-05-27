@@ -1,0 +1,51 @@
+npm install --save bootstrap
+npm install --save systemjs 
+npm install --save jquery 
+npm install --save react 
+npm install --save react-dom
+npm install --save lodash
+npm install --save underscore
+npm install --save yargs
+npm install --save request
+npm install --save express
+npm install --save handlebars
+npm install --save express-handlebars 
+npm install --save express-validator
+npm install --save express-session
+npm install --save helmet
+
+npm install --save-dev @types/node
+npm install --save-dev @types/jquery
+npm install --save-dev @types/react 
+npm install --save-dev @types/react-dom
+npm install --save-dev @types/lodash
+npm install --save-dev @types/underscore
+npm install --save-dev @types/yargs
+npm install --save-dev @types/request
+npm install --save-dev @types/express
+npm install --save-dev @types/handlebars
+npm install --save-dev @types/express-handlebars 
+npm install --save-dev @types/helmet
+npm install --save-dev @types/aws-lambda 
+npm install --save-dev chalk
+
+npm install --save ts-express-decorators express@4 @types/express
+npm install --save @types/express-session
+
+npm install --save-dev mocha
+npm install --save-dev @types/mocha
+npm install --save-dev expect
+npm install --save-dev @types/expect
+npm install --save-dev supertest 
+npm install --save-dev @types/supertest
+npm install --save-dev rewire
+npm install --save-dev @types/rewire
+
+npm install --save-dev aws-sdk
+npm install --save-dev serverless-offline
+npm install --save-dev @types/aws-lambda
+
+npm install --save-dev typescript
+npm install --save-dev gulp gulp-typescript
+npm install --save-dev webpack ts-loader
+npm install --save-dev lite-server 
