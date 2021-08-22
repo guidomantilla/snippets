@@ -17,6 +17,8 @@ sudo apt-get install \
 	software-properties-common \
 	git \
 	curl \
+	gnupg \
+    lsb-release \
 	nano \
 	htop \
 	zsh \
@@ -27,26 +29,25 @@ echo ""
 echo "**************************************************"
 echo "***       INSTALLING DOCKER                    ***"
 echo "**************************************************"
-curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -
-sudo apt-key fingerprint 0EBFCD88
-sudo add-apt-repository \
-   "deb [arch=amd64] https://download.docker.com/linux/ubuntu \
-   $(lsb_release -cs) \
-   stable"
+curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo gpg --dearmor -o /usr/share/keyrings/docker-archive-keyring.gpg
+echo \
+  "deb [arch=amd64 signed-by=/usr/share/keyrings/docker-archive-keyring.gpg] https://download.docker.com/linux/ubuntu \
+  $(lsb_release -cs) stable" | sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
+
 sudo apt-get update
 sudo apt-get install docker-ce docker-ce-cli containerd.io -y
 sudo docker run hello-world
 sudo groupadd docker
 sudo usermod -aG docker $USER
 docker run hello-world
-#chown "$USER":"$USER" /home/"$USER"/.docker -R
-#chmod g+rwx "$HOME/.docker" -R
+sudo systemctl enable docker.service
+sudo systemctl enable containerd.service
 echo ""
 echo ""
 echo "**************************************************"
 echo "***       INSTALLING DOCKER COMPOSE            ***"
 echo "**************************************************"
-sudo curl -L "https://github.com/docker/compose/releases/download/1.27.4/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
+sudo curl -L "https://github.com/docker/compose/releases/download/1.29.2/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
 sudo chmod +x /usr/local/bin/docker-compose
 echo ""
 echo ""
@@ -54,6 +55,7 @@ echo "**************************************************"
 echo "***       CREATING WORKSPACE FOLDER            ***"
 echo "**************************************************"
 mkdir Workspace
+#sudo chmod -R 777 Workspace
 echo ""
 echo ""
 echo "**************************************************"
@@ -77,6 +79,7 @@ echo ""
 echo "**************************************************"
 echo "***       REBOOTING NOW                        ***"
 echo "**************************************************"
+sudo timedatectl set-timezone America/Bogota
 history -c
 sleep 10
 sudo reboot now
