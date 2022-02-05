@@ -26,8 +26,8 @@ sudo apt-get install \
 	direnv \
 	make \
 	build-essential \
-	python2 \
-	python3 -y
+	python3 \
+	python3-pip -y
 echo ""
 echo ""
 echo "**************************************************"
