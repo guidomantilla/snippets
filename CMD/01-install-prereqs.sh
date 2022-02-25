@@ -25,6 +25,7 @@ sudo apt-get install \
 	fuse \
 	direnv \
 	make \
+	jq \
 	build-essential \
 	protobuf-compiler \
 	python3 \
@@ -56,7 +57,14 @@ sudo curl -L "https://github.com/docker/compose/releases/download/1.29.2/docker-
 sudo chmod +x /usr/local/bin/docker-compose
 mkdir -p ~/.docker/cli-plugins/
 chmod +x ~/.docker/cli-plugins/docker-compose
-
+echo ""
+echo ""
+echo "**************************************************"
+echo "***       INSTALLING HASHICORP TOOLS           ***"
+echo "**************************************************"
+curl -fsSL https://apt.releases.hashicorp.com/gpg | sudo apt-key add -
+sudo apt-add-repository "deb [arch=amd64] https://apt.releases.hashicorp.com $(lsb_release -cs) main"
+sudo apt-get update && sudo apt-get install consul vault boundary nomad waypoint terraform packer -y
 echo ""
 echo ""
 echo "**************************************************"
