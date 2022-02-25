@@ -26,6 +26,7 @@ sudo apt-get install \
 	direnv \
 	make \
 	build-essential \
+	protobuf-compiler \
 	python3 \
 	python3-pip -y
 echo ""
@@ -53,6 +54,9 @@ echo "***       INSTALLING DOCKER COMPOSE            ***"
 echo "**************************************************"
 sudo curl -L "https://github.com/docker/compose/releases/download/1.29.2/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
 sudo chmod +x /usr/local/bin/docker-compose
+mkdir -p ~/.docker/cli-plugins/
+chmod +x ~/.docker/cli-plugins/docker-compose
+
 echo ""
 echo ""
 echo "**************************************************"
