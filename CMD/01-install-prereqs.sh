@@ -60,6 +60,13 @@ chmod +x ~/.docker/cli-plugins/docker-compose
 echo ""
 echo ""
 echo "**************************************************"
+echo "***       INSTALLING MINIKUBE                  ***"
+echo "**************************************************"
+curl -LO https://storage.googleapis.com/minikube/releases/latest/minikube_latest_amd64.deb
+sudo dpkg -i minikube_latest_amd64.deb
+echo ""
+echo ""
+echo "**************************************************"
 echo "***       INSTALLING HASHICORP TOOLS           ***"
 echo "**************************************************"
 curl -fsSL https://apt.releases.hashicorp.com/gpg | sudo apt-key add -
