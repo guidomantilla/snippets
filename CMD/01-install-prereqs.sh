@@ -10,26 +10,29 @@ echo "***       - git, curl, nano, htop              ***"
 echo "***       - others                             ***"
 echo "**************************************************"
 sudo apt-get install \
-	apt-utils \
-	gnupg-agent \
-	apt-transport-https \
-	ca-certificates \
-	software-properties-common \
-	git \
-	curl \
-	gnupg \
-    lsb-release \
-	nano \
-	htop \
-	zsh \
-	fuse \
-	direnv \
-	make \
-	jq \
-	build-essential \
-	protobuf-compiler \
-	python3 \
-	python3-pip -y
+	apt-utils gnupg-agent apt-transport-https ca-certificates software-properties-common \
+	git curl wget gnupg lsb-release gnome-tweaks vlc ubuntu-restricted-extras libqt5webkit5 \
+	rar unrar p7zip-full p7zip-rar \
+	nano htop zsh fuse direnv make jq build-essential protobuf-compiler virtualbox \
+	-y
+echo ""
+echo ""
+echo "**************************************************"
+echo "***       INSTALLING:                          ***"
+echo "***       - java, python and others            ***"
+echo "**************************************************"
+sudo apt-get install \
+	python3 python3-pip openjdk-17-jdk \
+	-y
+
+wget https://go.dev/dl/go1.18.2.linux-amd64.tar.gz
+tar -C /usr/local -xzf go1.18.2.linux-amd64.tar.gz
+sudo rm go1.18.2.linux-amd64.tar.gz
+
+curl https://raw.githubusercontent.com/creationix/nvm/master/install.sh | bash 
+nvm install 16.15.0
+nvm use default
+
 echo ""
 echo ""
 echo "**************************************************"
@@ -41,29 +44,28 @@ echo \
   $(lsb_release -cs) stable" | sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
 
 sudo apt-get update
-sudo apt-get install docker-ce docker-ce-cli containerd.io -y
+sudo apt-get install docker-ce docker-ce-cli containerd.io docker-compose-plugin  -y
+
 sudo docker run hello-world
 sudo groupadd docker
 sudo usermod -aG docker $USER
 docker run hello-world
 sudo systemctl enable docker.service
 sudo systemctl enable containerd.service
+
 echo ""
 echo ""
 echo "**************************************************"
-echo "***       INSTALLING DOCKER COMPOSE            ***"
-echo "**************************************************"
-sudo curl -L "https://github.com/docker/compose/releases/download/1.29.2/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
-sudo chmod +x /usr/local/bin/docker-compose
-mkdir -p ~/.docker/cli-plugins/
-chmod +x ~/.docker/cli-plugins/docker-compose
-echo ""
-echo ""
-echo "**************************************************"
-echo "***       INSTALLING MINIKUBE                  ***"
+echo "***       INSTALLING MINIKUBE & HELM           ***"
 echo "**************************************************"
 curl -LO https://storage.googleapis.com/minikube/releases/latest/minikube_latest_amd64.deb
 sudo dpkg -i minikube_latest_amd64.deb
+
+curl https://baltocdn.com/helm/signing.asc | sudo apt-key add -
+echo "deb https://baltocdn.com/helm/stable/debian/ all main" | sudo tee /etc/apt/sources.list.d/helm-stable-debian.list
+sudo apt-get update
+sudo apt-get install helm -y
+
 echo ""
 echo ""
 echo "**************************************************"
@@ -85,12 +87,6 @@ echo "**************************************************"
 echo "***       DOCKER VERSION                       ***"
 echo "**************************************************"
 docker version
-echo ""
-echo ""
-echo "**************************************************"
-echo "***       DOCKER COMPOSE VERSION               ***"
-echo "**************************************************"
-docker-compose version
 echo ""
 echo ""
 echo "**************************************************"
