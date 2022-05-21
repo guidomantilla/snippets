@@ -26,7 +26,7 @@ sudo apt-get install \
 	-y
 
 wget https://go.dev/dl/go1.18.2.linux-amd64.tar.gz
-tar -C /usr/local -xzf go1.18.2.linux-amd64.tar.gz
+sudo tar -C /usr/local -xzf go1.18.2.linux-amd64.tar.gz
 sudo rm go1.18.2.linux-amd64.tar.gz
 
 curl https://raw.githubusercontent.com/creationix/nvm/master/install.sh | bash 
