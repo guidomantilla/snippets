@@ -13,8 +13,11 @@ sudo apt-get install \
 	apt-utils gnupg-agent apt-transport-https ca-certificates software-properties-common \
 	git curl wget gnupg lsb-release gnome-tweaks vlc ubuntu-restricted-extras libqt5webkit5 \
 	rar unrar p7zip-full p7zip-rar \
-	nano htop zsh fuse direnv make jq build-essential protobuf-compiler virtualbox \
+	nano htop zsh fuse direnv make bat jq hey tmux build-essential protobuf-compiler virtualbox \
 	-y
+curl -sS https://webinstall.dev/webi | bash
+curl -sS https://webinstall.dev/k9s | bash
+#export PATH="/home/raven/.local/bin:$PATH"
 echo ""
 echo ""
 echo "**************************************************"
@@ -66,6 +69,10 @@ echo "deb https://baltocdn.com/helm/stable/debian/ all main" | sudo tee /etc/apt
 sudo apt-get update
 sudo apt-get install helm -y
 
+sudo curl -fsSLo /usr/share/keyrings/kubernetes-archive-keyring.gpg https://packages.cloud.google.com/apt/doc/apt-key.gpg
+echo "deb [signed-by=/usr/share/keyrings/kubernetes-archive-keyring.gpg] https://apt.kubernetes.io/ kubernetes-xenial main" | sudo tee /etc/apt/sources.list.d/kubernetes.list
+sudo apt-get update
+sudo apt-get install -y kubectl
 echo ""
 echo ""
 echo "**************************************************"
@@ -73,7 +80,7 @@ echo "***       INSTALLING HASHICORP TOOLS           ***"
 echo "**************************************************"
 curl -fsSL https://apt.releases.hashicorp.com/gpg | sudo apt-key add -
 sudo apt-add-repository "deb [arch=amd64] https://apt.releases.hashicorp.com $(lsb_release -cs) main"
-sudo apt-get update && sudo apt-get install consul vault boundary nomad waypoint terraform packer -y
+sudo apt-get update && sudo apt-get install consul vault boundary nomad waypoint terraform packer vagrant -y
 echo ""
 echo ""
 echo "**************************************************"
