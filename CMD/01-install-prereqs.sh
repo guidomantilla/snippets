@@ -15,9 +15,22 @@ sudo apt-get install \
 	rar unrar p7zip-full p7zip-rar \
 	nano htop zsh fuse direnv make bat jq hey tmux build-essential protobuf-compiler virtualbox \
 	-y
+echo ""
+echo ""
+echo "**************************************************"
+echo "***       INSTALLING:                          ***"
+echo "***       - cli-github                         ***"
+echo "**************************************************"
+curl -fsSL https://cli.github.com/packages/githubcli-archive-keyring.gpg | sudo dd of=/usr/share/keyrings/githubcli-archive-keyring.gpg
+sudo chmod go+r /usr/share/keyrings/githubcli-archive-keyring.gpg
+echo "deb [arch=$(dpkg --print-architecture) signed-by=/usr/share/keyrings/githubcli-archive-keyring.gpg] https://cli.github.com/packages stable main" | sudo tee /etc/apt/sources.list.d/github-cli.list > /dev/null
+sudo apt update
+sudo apt install gh
+
 curl -sS https://webinstall.dev/webi | bash
 curl -sS https://webinstall.dev/k9s | bash
 #export PATH="/home/raven/.local/bin:$PATH"
+
 echo ""
 echo ""
 echo "**************************************************"
