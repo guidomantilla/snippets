@@ -12,8 +12,8 @@ echo "**************************************************"
 sudo apt-get install \
 	apt-utils gnupg-agent apt-transport-https ca-certificates software-properties-common \
 	git curl wget gnupg lsb-release gnome-tweaks vlc ubuntu-restricted-extras libqt5webkit5 \
-	rar unrar p7zip-full p7zip-rar \
-	nano htop zsh fuse direnv make bat jq hey tmux build-essential protobuf-compiler virtualbox \
+	rar unrar p7zip-full p7zip-rar memcached\
+	nano htop zsh fuse direnv make bat jq hey tmux build-essential protobuf-compiler virtualbox gcc \
 	-y
 echo ""
 echo ""
@@ -41,13 +41,15 @@ sudo apt-get install \
 	python3 python3-pip openjdk-17-jdk \
 	-y
 
-wget https://go.dev/dl/go1.18.2.linux-amd64.tar.gz
-sudo tar -C /usr/local -xzf go1.18.2.linux-amd64.tar.gz
-sudo rm go1.18.2.linux-amd64.tar.gz
+wget https://go.dev/dl/go1.19.linux-amd64.tar.gz
+sudo tar -C /usr/local -xzf go1.19.linux-amd64.tar.gz
+sudo rm go1.19.linux-amd64.tar.gz
 
 curl https://raw.githubusercontent.com/creationix/nvm/master/install.sh | bash 
 nvm install 16.15.0
 nvm use default
+
+
 
 echo ""
 echo ""
@@ -118,6 +120,8 @@ echo ""
 echo "**************************************************"
 echo "***       REBOOTING NOW                        ***"
 echo "**************************************************"
+sudo sysctl -w vm.max_map_count=524288
+sudo sysctl -w fs.file-max=131072
 sudo timedatectl set-timezone America/Bogota
 history -c
 sleep 10

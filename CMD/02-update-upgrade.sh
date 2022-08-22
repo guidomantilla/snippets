@@ -3,7 +3,7 @@ echo ""
 echo "**************************************************"
 echo "***       UPDATING & UPGRADING                 ***"
 echo "**************************************************"
-sudo apt-get update && sudo apt-get upgrade -y && sudo apt-get -y dist-upgrade
+sudo apt-get update && sudo apt-get upgrade -y && sudo apt-get -y dist-upgrade && sudo apt autoremove -y
 echo ""
 echo ""
 echo "**************************************************"
