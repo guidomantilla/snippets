@@ -1,2 +1,1 @@
-docker system prune -f
-docker volume prune -f
+docker system prune --force --all --volumes
