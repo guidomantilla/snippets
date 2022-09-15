@@ -10,10 +10,10 @@ echo "***       - git, curl, nano, htop              ***"
 echo "***       - others                             ***"
 echo "**************************************************"
 sudo apt-get install \
-	apt-utils gnupg-agent apt-transport-https ca-certificates software-properties-common \
-	git curl wget gnupg lsb-release gnome-tweaks vlc ubuntu-restricted-extras libqt5webkit5 \
-	rar unrar p7zip-full p7zip-rar memcached\
-	nano htop zsh fuse direnv make bat jq hey tmux build-essential protobuf-compiler virtualbox gcc \
+	apt-transport-https apt-utils ca-certificates curl fuse gnupg gnupg-agent lsb-release make nano software-properties-common wget zsh \
+	git memcached htop direnv bat jq hey tmux build-essential protobuf-compiler virtualbox gcc \
+	gnome-tweaks vlc ubuntu-restricted-extras libqt5webkit5 \
+	rar unrar p7zip-full p7zip-rar \
 	-y
 echo ""
 echo ""
@@ -21,11 +21,11 @@ echo "**************************************************"
 echo "***       INSTALLING:                          ***"
 echo "***       - cli-github                         ***"
 echo "**************************************************"
-curl -fsSL https://cli.github.com/packages/githubcli-archive-keyring.gpg | sudo dd of=/usr/share/keyrings/githubcli-archive-keyring.gpg
-sudo chmod go+r /usr/share/keyrings/githubcli-archive-keyring.gpg
-echo "deb [arch=$(dpkg --print-architecture) signed-by=/usr/share/keyrings/githubcli-archive-keyring.gpg] https://cli.github.com/packages stable main" | sudo tee /etc/apt/sources.list.d/github-cli.list > /dev/null
-sudo apt update
-sudo apt install gh
+curl -fsSL https://cli.github.com/packages/githubcli-archive-keyring.gpg | sudo dd of=/usr/share/keyrings/githubcli-archive-keyring.gpg \
+&& sudo chmod go+r /usr/share/keyrings/githubcli-archive-keyring.gpg \
+&& echo "deb [arch=$(dpkg --print-architecture) signed-by=/usr/share/keyrings/githubcli-archive-keyring.gpg] https://cli.github.com/packages stable main" | sudo tee /etc/apt/sources.list.d/github-cli.list > /dev/null \
+&& sudo apt update \
+&& sudo apt install gh -y
 
 curl -sS https://webinstall.dev/webi | bash
 curl -sS https://webinstall.dev/k9s | bash
@@ -62,7 +62,7 @@ echo \
   $(lsb_release -cs) stable" | sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
 
 sudo apt-get update
-sudo apt-get install docker-ce docker-ce-cli containerd.io docker-compose-plugin  -y
+sudo apt-get install docker-ce docker-ce-cli containerd.io docker-compose-plugin -y
 
 sudo docker run hello-world
 sudo groupadd docker
