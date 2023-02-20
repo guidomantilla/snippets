@@ -10,7 +10,7 @@ echo ""
 echo "**************************************************"
 echo "***       INSTALLING SENTY                     ***"
 echo "**************************************************"
-./install.sh --no-user-prompt
+./install.sh --skip-user-creation --no-report-self-hosted-issues
 
 docker compose up -d
 docker compose run --rm web createuser
